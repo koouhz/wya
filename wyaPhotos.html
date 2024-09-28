@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/logo123.ico" type="image/x-icon">
+    <title>Galería WYA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url("images/bg1.jpg");
+            background-position: center;
+            background-size: cover;
+            color: #e0e0e0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .nav-logo {
+            color: #e50914;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav a {
+            color: #e0e0e0;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 10px 15px;
+            transition: background-color 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .nav a:hover {
+            background-color: #e50914;
+        }
+
+        .content {
+            margin-top: 80px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .images-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .images-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .images-container img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px 0;
+            text-align: center;
+            background-color: transparent;
+            color: #a0a0a0;
+            font-size: 0.85em;
+        }
+
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #e0e0e0;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 10px;
+            }
+
+            .nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, 0.9);
+                padding: 20px;
+            }
+
+            .nav ul.show {
+                display: flex;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+
+            .content {
+                margin-top: 60px;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .images-container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">WYA</a>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul id="menu">
+            <li><a href="index.html">Página Principal</a></li>
+            <li><a href="#wins">Wins</a></li>
+            <li><a href="#giveaways">Giveaways</a></li>
+            <li><a href="#memes">Memes</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>Galería WYA</h1>
+
+        <h2 id="wins">Wins</h2>
+        <div class="images-container">
+            <img src="images/win1.png" alt="Imagen 1">
+            <img src="images/win2.png" alt="Imagen 2">
+            <img src="images/win3.png" alt="Imagen 3">
+        </div>
+
+        <h2 id="giveaways">Giveaways</h2>
+        <div class="images-container">
+            <img src="images/gw1.png" alt="Imagen 4">
+            <img src="images/gw2.png" alt="Imagen 5">
+            <img src="images/gw3.png" alt="Imagen 6">
+        </div>
+
+        <h2 id="memes">Memes</h2>
+        <div class="images-container">
+            <img src="images/meme1.png" alt="Imagen 7">
+            <img src="images/meme2.png" alt="Imagen 8">
+            <img src="images/meme3.jpg" alt="Imagen 9">
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 koouhz. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('show');
+        }
+    </script>
+</body>
+
+</html>

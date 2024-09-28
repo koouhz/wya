@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clips</title>
+    <link rel="shortcut icon" href="images/logo123.ico" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            background-image: url("images/bg1.jpg");
+            background-position: center;
+            background-size: cover;
+            color: #e0e0e0;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            z-index: 10;
+        }
+
+        /* Estilos del icono de hamburguesa */
+        .hamburguesa {
+            width: 30px;
+            height: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            margin-right: 20px;
+            transition: all 0.3s ease;
+            z-index: 11; /* Para que quede encima del menú */
+        }
+
+        .hamburguesa span {
+            display: block;
+            height: 4px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Efecto hover del botón hamburguesa */
+        .hamburguesa:hover span {
+            background-color: #ff4d4d; /* Cambia el color al pasar el cursor */
+        }
+
+        /* Efecto hover para mostrar el menú */
+        .header:hover .menu,
+        .menu:hover {
+            display: flex; /* Mantiene el menú visible cuando el cursor está en él */
+        }
+
+        /* Estilo inicial del menú desplegable (oculto) */
+        .menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            transition: max-height 0.4s ease;
+        }
+
+        /* Estilo para los enlaces dentro del menú */
+        .menu a {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .menu a:hover {
+            background-color: rgba(255, 0, 0, 0.7);
+        }
+
+        /* Animaciones para el icono de hamburguesa cuando se despliega */
+        .hamburguesa.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburguesa.active span:nth-child(2) {
+            opacity: 0; /* Ocultar la línea del medio */
+        }
+
+        .hamburguesa.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin: 10px 0;
+            padding: 0;
+            font-size: calc(1.5em + (1vw * .75)); /* Responsive font size */
+            color: #d1d1d1;
+        }
+
+        .section {
+            margin-top: 80px;
+            margin-bottom: 40px;
+            padding: 20px;
+            width: auto; /* Adjusted to auto to fit content */
+            max-width: calc(100% - 40px); /* Full width minus padding */
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .iframe-container {
+            padding: 15px 0px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center items in the container */
+            gap: 20px;
+        }
+
+        iframe {
+            width: calc(100% - 20px); /* Full width minus gap */
+            max-width: 500px; /* Maximum width for larger screens */
+            height: 400px; /* Increased height for iframes */
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        iframe:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        footer {
+            width: calc(100% - 40px); /* Full width minus padding */
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            background-color: transparent;
+            color: #a0a0a0;
+            font-size: calc(0.75em + (1vw * .25)); /* Responsive footer text size */
+        }
+
+        footer p {
+            margin :10px ; /* Added margin for better spacing */
+        }
+
+        @media (max-width :600px) { /* Styles for small screens */
+            nav a {
+                font-size : calc(1em + (1vw * .25)); /* Responsive link size */
+            }
+        }
+
+        @media (min-width :601px) { /* Styles for larger screens */
+            .section {
+                width : calc(80%); /* Centered with less width on larger screens */
+                margin-left : auto ; /* Center horizontally */
+                margin-right : auto ; /* Center horizontally */
+            }
+            iframe {
+                max-width : calc(50% -20px); /* Adjust maximum width for larger screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <div class="hamburguesa" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu">
+                <a href="index.html">Inicio</a>
+                <a href="wyaPhotos.html">Galería</a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="section">
+        <h1>Clips</h1>
+        <h2>Cirze</h2>
+        <div class="iframe-container">
+            <iframe src="https://www.youtube.com/embed/kl6bre7c39s?si=EwQ4tJcJqz-hBcs8" title="Clip 1" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/EqpfY4zAtWQ?si=OC4vigDKTIc5Ra0w" title="Clip 2" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Teki</h2>
+        <div class="iframe-container">
+            <iframe src="https://www.youtube.com/embed/Ns6UHedNMGg" title="Clip 3" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/9v7sKUM38Wc" title="Clip 4" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Polco</h2>
+        <div class="iframe-container">
+            <iframe src="https://www.youtube.com/embed/7z-htpzen44?si=hIhvVJdg-uobpk5n" title="Clip 5" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/l9p9oLjBKEA?si=aIsiBpEoFBVGBli-" title="Clip 6" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 koouhz. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            const hamburguesa = document.querySelector('.hamburguesa');
+            hamburguesa.classList.toggle('active');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Cerrar el menú si se hace clic fuera de él
+        document.addEventListener('click', function(event) {
+            const menu = document.querySelector('.menu');
+            const hamburguesa = document.querySelector('.hamburguesa');
+            
+            if (!menu.contains(event.target) && !hamburguesa.contains(event.target)) {
+                menu.style.display = 'none';  // Cerrar menú
+                hamburguesa.classList.remove('active');  // Reiniciar animación de hamburguesa
+            }
+        });
+    </script>
+</body>
+</html>

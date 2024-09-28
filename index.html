@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WYA</title>
+    <link rel="shortcut icon" href="images/logo123.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Bloodlust&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("images/bg1.jpg");
+            background-position: center;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            font-family: 'Bloodlust', cursive;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: center;
+            opacity: 0;
+            animation: fadeInAndScale 2s forwards;
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin: 20px 0;
+            color: #e0e0e0d0;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        h1:hover {
+            transform: scale(1.1);
+            color: #ff6347;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .round-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .round-image:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .menu-hamburguesa {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-icon {
+            width: 35px;
+            height: 5px;
+            background-color: #e0e0e0;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-hamburguesa:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-items {
+            background-color: transparent;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 200px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+        }
+
+        .menu-items.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-items a {
+            display: flex;
+            align-items: center;
+            color: #e0e0e0;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+
+        .menu-items a:hover {
+            background-color: #333;
+            transform: scale(1.05);
+        }
+
+        .youtube-channel {
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .youtube-channel:hover {
+            transform: scale(1.05);
+        }
+
+        .youtube-logo {
+            width: 50px;
+            height: 25px;
+            margin-right: 10px;
+        }
+
+        .images-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 20px;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .images-container img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .images-container img:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeInAndScale {
+            0% {
+                opacity: 0;
+                transform: scale(2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        footer {
+            position: fixed;
+            bottom: 20px;
+            color: #e0e0e0;
+            text-align: center;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 4rem;
+            }
+
+            .round-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .menu-items {
+                width: 100%;
+                top: 0;
+                height: 100vh;
+                justify-content: center;
+            }
+
+            .menu-items a {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .round-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .menu-items a {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-hamburguesa" id="menu-icon">
+        <div class="menu-icon"></div>
+        <div class="menu-icon"></div>
+        <div class="menu-icon"></div>
+    </div>
+
+    <div class="menu-items" id="menu-items">
+        <a href="clips.html">  |🚯 Clips</a>
+        <a href="wyaPhotos.html">  |📷 Galeria</a>
+        <a target="_blank" href="https://www.youtube.com/channel/UCEA2B_LTkejAm9q4vlXKzwQ" class="youtube-channel">
+            <img src="images/ytlogo.png" alt="YouTube" class="youtube-logo"> 
+            Teki
+        </a>
+        <a target="_blank" href="https://www.youtube.com/@polcoo." class="youtube-channel">
+            <img src="images/ytlogo.png" alt="YouTube" class="youtube-logo">
+            Polco
+        </a>
+        <a target="_blank" href="https://www.youtube.com/@Cirze-yz2ok" class="youtube-channel">
+            <img src="images/ytlogo.png" alt="YouTube" class="youtube-logo">
+            Cirze
+        </a>
+    </div>
+
+    <div class="container">
+        <img id="wya-photo" src="images/logo123.jpg" alt="Imagen redonda" class="round-image">
+        <h1 id="wya-text"><a target="_blank" href="https://discord.gg/wyaa">WYA</a></h1>
+    </div>
+
+    <footer>
+        &copy; 2024 koouhz. Todos los derechos reservados.
+    </footer>
+
+    <script>
+        const menuIcon = document.getElementById('menu-icon');
+        const menuItems = document.getElementById('menu-items');
+
+        function showMenu() {
+            menuItems.classList.add('show');
+        }
+
+        function hideMenu() {
+            menuItems.classList.remove('show');
+        }
+
+        menuIcon.addEventListener('click', () => {
+            menuItems.classList.toggle('show');
+        });
+
+        menuIcon.addEventListener('mouseenter', showMenu);
+        menuIcon.addEventListener('mouseleave', hideMenu);
+        menuItems.addEventListener('mouseleave', hideMenu);
+        menuItems.addEventListener('mouseenter', showMenu);
+
+        const wyaText = document.getElementById('wya-text');
+        wyaText.addEventListener('mouseover', () => {
+            wyaText.style.textShadow = '2px 2px 10px rgba(255, 100, 100, 0.5)';
+        });
+
+        wyaText.addEventListener('mouseout', () => {
+            wyaText.style.textShadow = 'none';
+        });
+
+        const wyaPhoto = document.getElementById('wya-photo');
+        wyaPhoto.addEventListener('mouseover', () => {
+            wyaPhoto.style.boxShadow = '0 0 20px rgba(255, 100, 100, 0.5)';
+        });
+
+        wyaPhoto.addEventListener('mouseout', () => {
+            wyaPhoto.style.boxShadow = 'none';
+        });
+    </script>
+</body>
+</html>
