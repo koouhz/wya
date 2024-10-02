@@ -19,18 +19,6 @@ WYA is a minimalist web application designed specifically for the WYA clan and i
 - **JavaScript**: For interactive elements and dynamic content.
 - **Git**: For version control and collaboration.
 
-## Installation and Setup
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/wya.git
-   ```
-2. Navigate to the project directory:
-   ```
-   cd wya
-   ```
-3. Open `index.html` in your preferred web browser.
-
 ## Usage
 
 Simply open the web application in a browser. Click on the WYA text to be redirected to the Discord server.
