@@ -41,7 +41,7 @@ For any queries or suggestions, feel free to reach out:
 
 Email: [kouhzj@gmail.com](mailto:kouhzj@gmail.com)
 
-Project Link: [https://github.com/yourusername/wya](https://github.com/koouhz/wya)
+Project Link: [https://github.com/koouhz/wya](https://github.com/koouhz/wya)
 
 ## License
 
