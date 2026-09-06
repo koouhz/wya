@@ -48,6 +48,25 @@ function Header() {
                 <span className="site-brand-name">COMMUNITY LOU</span>
             </Link>
 
+            <div className="mobile-header-actions">
+                {isLoggedIn ? (
+                    <>
+                        <Link to="/profile" className="mobile-header-action" aria-label="Abrir perfil" title="Perfil">
+                            <span className="profile-avatar">
+                                {user?.avatar_url ? <img src={user.avatar_url} alt="" /> : <Icon name="user" size={17} />}
+                            </span>
+                        </Link>
+                        <button className="mobile-header-action" onClick={logout} aria-label="Cerrar sesión" title="Cerrar sesión">
+                            <Icon name="logout" size={18} />
+                        </button>
+                    </>
+                ) : (
+                    <Link to="/login" className="mobile-header-action" aria-label="Iniciar sesión" title="Iniciar sesión">
+                        <Icon name="user" size={18} />
+                    </Link>
+                )}
+            </div>
+
             <nav className="site-nav" aria-label="Navegación principal">
                 {primaryLinks.map(link => (
                     <Link
