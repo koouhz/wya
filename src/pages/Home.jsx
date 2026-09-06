@@ -4,10 +4,11 @@ import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 import { Icon } from '../components/Icons.jsx'
 import { useClips, useMiembrosTier, useEstadisticasClan } from '../hooks/useSupabase.js'
+import { useUserAuth } from '../context/UserAuthContext.jsx'
 import './Home.css'
 
 const discoveryNodes = [
-    { id: 'tier', label: 'Tier List', detail: 'La clasificación del clan', icon: 'trophy', path: '/tier-list', position: 'node-top' },
+    { id: 'tier', label: 'Tier List', detail: 'La clasificación comunitaria', icon: 'trophy', path: '/tier-list', position: 'node-top' },
     { id: 'clips', label: 'Clips', detail: 'Momentos que dejan marca', icon: 'video', path: '/clips', position: 'node-right' },
     { id: 'clan', label: 'Miembros', detail: 'La gente detrás del tag', icon: 'user', path: '/carries', position: 'node-bottom' },
     { id: 'events', label: 'Eventos', detail: 'Próximo desafío', icon: 'calendar', path: '/events', position: 'node-left' }
@@ -15,12 +16,14 @@ const discoveryNodes = [
 
 function Home() {
     const [selectedNode, setSelectedNode] = useState(null)
-    const { data: miembros } = useMiembrosTier()
+    const { data: miembros, loading: loadingMembers } = useMiembrosTier()
     const { data: clips } = useClips()
     const { data: clanStats } = useEstadisticasClan()
+    const { user } = useUserAuth()
     const activeMembers = miembros || []
     const featuredMember = [...activeMembers].sort((a, b) => (b.puntos_totales || 0) - (a.puntos_totales || 0))[0]
     const totalPoints = activeMembers.reduce((total, member) => total + (member.puntos_totales || 0), 0)
+    const isVerifiedMember = Boolean(user && activeMembers.some(member => member.usuario_id === user.id))
 
     const handleNode = (node) => {
         setSelectedNode(selectedNode === node.id ? null : node.id)
@@ -37,8 +40,8 @@ function Home() {
                 <section className="hero-stage" aria-labelledby="home-title">
                     <div className="hero-copy">
                         <p className="eyebrow"><span /> Comunidad competitiva</p>
-                        <h1 id="home-title">RYO ON TOP<span>.</span></h1>
-                        <p className="hero-lede">Luchando por la Top.</p>
+                        <h1 id="home-title">COMMUNITY LOU<span>.</span></h1>
+                        <p className="hero-lede">Una comunidad para competir, compartir y crecer.</p>
                     </div>
 
                     <div className="skull-orbit" aria-label="Explora la plataforma">
@@ -57,7 +60,7 @@ function Home() {
                             </button>
                         ))}
                         <div className="hero-logo">
-                            <img src={`${import.meta.env.BASE_URL}images/logo123.jpg`} alt="Calavera RYO" />
+                            <img src={`${import.meta.env.BASE_URL}images/logo123.jpg`} alt="Community Lou" />
                             <span className="logo-pulse" />
                         </div>
                         <p className="orbit-hint">Interactúa para explorar</p>
@@ -80,11 +83,15 @@ function Home() {
                         <span>Entrar al Discord</span>
                         <Icon name="externalLink" size={15} />
                     </a>
+                    {!loadingMembers && !isVerifiedMember && <Link className="membership-cta" to="/solicitar-membresia">
+                        <Icon name="user" size={18} />
+                        <span>¿Aún no eres miembro? Solicita serlo</span>
+                    </Link>}
                 </section>
 
-                <section className="clan-snapshot" aria-label="Estado del clan">
+                <section className="clan-snapshot" aria-label="Estado de la comunidad">
                     <div className="snapshot-heading">
-                        <span className="section-kicker">Estado del clan</span>
+                        <span className="section-kicker">Estado de la comunidad</span>
                         <span className="live-dot"><i /> En línea</span>
                     </div>
                     <div className="snapshot-stats">

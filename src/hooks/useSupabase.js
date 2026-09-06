@@ -3,11 +3,7 @@ import {
     obtenerMiembros,
     obtenerClips,
     obtenerCategoriasClips,
-    obtenerImagenesGaleria,
-    obtenerCategoriasGaleria,
     obtenerCarries,
-    obtenerVetados,
-    obtenerTiposVetado,
     obtenerMisClips,
     obtenerMiembrosTier,
     obtenerEstadisticasClan,
@@ -83,24 +79,8 @@ export function useCategoriasClips() {
     return useSupabaseQuery(obtenerCategoriasClips)
 }
 
-export function useImagenesGaleria() {
-    return useSupabaseQuery(obtenerImagenesGaleria)
-}
-
-export function useCategoriasGaleria() {
-    return useSupabaseQuery(obtenerCategoriasGaleria)
-}
-
 export function useCarries() {
     return useSupabaseQuery(obtenerCarries)
-}
-
-export function useVetados() {
-    return useSupabaseQuery(obtenerVetados)
-}
-
-export function useTiposVetado() {
-    return useSupabaseQuery(obtenerTiposVetado)
 }
 
 export function useMisClips(usuarioId) {
@@ -125,29 +105,6 @@ export function useClipsAgrupados() {
 
     return {
         data: clipsAgrupados ? Object.values(clipsAgrupados) : null,
-        loading,
-        error
-    }
-}
-export function useGaleriaAgrupada() {
-    const { data: imagenes, loading, error } = useImagenesGaleria()
-
-    const imagenesAgrupadas = imagenes?.reduce((acc, img) => {
-        const catSlug = img.categorias_galeria?.slug || 'otros'
-        const catNombre = img.categorias_galeria?.nombre || 'Otros'
-
-        if (!acc[catSlug]) {
-            acc[catSlug] = {
-                categoria: img.categorias_galeria,
-                imagenes: []
-            }
-        }
-        acc[catSlug].imagenes.push(img)
-        return acc
-    }, {})
-
-    return {
-        data: imagenesAgrupadas ? Object.values(imagenesAgrupadas) : null,
         loading,
         error
     }

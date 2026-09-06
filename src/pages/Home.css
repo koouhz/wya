@@ -43,7 +43,7 @@
     position: relative;
     min-height: 570px;
     display: grid;
-    grid-template-columns: minmax(220px, 0.8fr) minmax(430px, 1.2fr);
+    grid-template-columns: minmax(480px, 1.15fr) minmax(430px, 0.85fr);
     align-items: center;
     gap: 30px;
 }
@@ -79,9 +79,10 @@
 .hero-copy h1 {
     margin: 18px 0 4px;
     font-family: var(--font-display);
-    font-size: clamp(4.5rem, 10vw, 8.5rem);
+    font-size: clamp(3rem, 5.4vw, 5.2rem);
     line-height: 0.84;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.025em;
+    white-space: nowrap;
     color: #f7f3ec;
     text-shadow: 8px 8px 0 rgba(240, 90, 71, 0.12);
 }
@@ -269,6 +270,28 @@
     transform: translateY(-2px);
 }
 
+.membership-cta {
+    position: absolute;
+    left: 0;
+    bottom: 76px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 42px;
+    padding: 0 14px;
+    color: #f7f3ec;
+    border: 1px solid rgba(240, 90, 71, 0.55);
+    background: rgba(240, 90, 71, 0.12);
+    font-size: 0.76rem;
+    font-weight: 800;
+    transition: background 180ms ease, transform 180ms ease;
+}
+
+.membership-cta:hover {
+    background: rgba(240, 90, 71, 0.24);
+    transform: translateY(-2px);
+}
+
 .clan-snapshot {
     display: grid;
     grid-template-columns: 0.8fr 1.6fr 1fr;
@@ -314,10 +337,11 @@
     .home-main { width: min(calc(100% - 32px), 620px); padding-top: 32px; padding-bottom: 120px; }
     .hero-stage { min-height: auto; display: flex; flex-direction: column; gap: 12px; }
     .hero-copy { align-self: flex-start; }
-    .hero-copy h1 { font-size: clamp(4rem, 19vw, 6rem); }
+    .hero-copy h1 { font-size: clamp(2.7rem, 10.5vw, 4.5rem); }
     .hero-lede { max-width: 300px; }
     .skull-orbit { width: min(100%, 520px); margin-top: -4px; }
     .discord-cta { position: relative; left: auto; bottom: auto; align-self: flex-start; margin-top: -18px; }
+    .membership-cta { position: relative; left: auto; bottom: auto; align-self: flex-start; margin-top: 0; }
     .node-detail { position: relative; right: auto; bottom: auto; align-self: center; }
     .node-bottom { bottom: calc(16% - 40px); }
     .orbit-hint { bottom: 31%; }
@@ -326,8 +350,8 @@
 }
 
 @media (max-width: 460px) {
-    .hero-copy h1 { font-size: 4rem; }
-    .skull-orbit { width: min(100%, 300px); margin-top: -66px; margin-left: 0; }
+    .hero-copy h1 { font-size: clamp(2.2rem, 10.8vw, 3.2rem); }
+    .skull-orbit { width: min(100%, 300px); margin-top: 8px; margin-left: 0; }
     .discovery-node { min-width: 0; gap: 6px; }
     .node-icon { width: 32px; height: 32px; }
     .node-label { font-size: 0.62rem; }
@@ -340,5 +364,5 @@
 
 @media (prefers-reduced-motion: reduce) {
     .hero-copy, .clan-snapshot, .orbit-ring-outer, .logo-pulse { animation: none; }
-    .hero-logo, .discovery-node, .node-detail, .discord-cta { transition: none; }
+    .hero-logo, .discovery-node, .node-detail, .discord-cta, .membership-cta { transition: none; }
 }

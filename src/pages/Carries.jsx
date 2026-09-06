@@ -44,9 +44,9 @@ function Carries() {
                 <div className="page-header">
                     <h1>
                         <Icon name="star" size={36} />
-                        Top Clan
+                        Miembros destacados
                     </h1>
-                    <p className="page-subtitle">Los mejores jugadores de Ryo</p>
+                    <p className="page-subtitle">Jugadores destacados de todas las comunidades</p>
                 </div>
 
                 {}
@@ -77,7 +77,7 @@ function Carries() {
                     <span className="filter-count">{carriesFiltrados.length} jugadores</span>
                 </div>
 
-                {loading && <Loading text="Cargando top clan..." />}
+                {loading && <Loading text="Cargando miembros destacados..." />}
 
                 {error && <ErrorMessage message={error} onRetry={refetch} />}
 

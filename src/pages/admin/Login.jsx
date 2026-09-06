@@ -69,7 +69,7 @@ function Login() {
         <div className="login-page">
             <div className="login-card">
                 <div className="login-header">
-                    <h1>Ryo</h1>
+                    <h1>Community Lou</h1>
                     <p>Panel de Administración</p>
                 </div>
 
@@ -88,7 +88,7 @@ function Login() {
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="admin@ryo.com"
+                            placeholder="admin@communitylou.com"
                             required
                             disabled={loading}
                         />

@@ -54,7 +54,7 @@ function UserAuth() {
                 if (registration?.requiresConfirmation) {
                     setSuccess('Cuenta creada. Revisa tu correo y confirma la cuenta antes de iniciar sesión.')
                 } else {
-                    setSuccess('Cuenta creada correctamente. Ya puedes comenzar a usar RYO.')
+                    setSuccess('Cuenta creada correctamente. Ya puedes comenzar a usar Community Lou.')
                     window.setTimeout(() => navigate(from, { replace: true }), 700)
                 }
             }
@@ -99,8 +99,8 @@ function UserAuth() {
 
             <div className="auth-container">
                 <Link to="/" className="auth-logo">
-                    <img src={`${import.meta.env.BASE_URL}images/logo123.jpg`} alt="Ryo" />
-                    <span>Ryo</span>
+                    <img src={`${import.meta.env.BASE_URL}images/logo123.jpg`} alt="Community Lou" />
+                    <span>Community Lou</span>
                 </Link>
 
                 <div className="auth-card">
@@ -188,7 +188,7 @@ function UserAuth() {
                     <p className="auth-note">
                         {mode === 'login'
                             ? '¿No tienes cuenta? Regístrate para comentar y reaccionar.'
-                            : 'Al registrarte podrás comentar y reaccionar en clips y galería.'}
+                            : 'Al registrarte podrás comentar y reaccionar en clips y actividades.'}
                     </p>
                 </div>
 

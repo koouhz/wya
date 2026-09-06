@@ -147,6 +147,25 @@ export async function crearDesafio(desafio) {
   return data
 }
 
+export async function actualizarDesafio(id, desafio) {
+  const { data, error } = await supabase
+    .from('desafios_activos')
+    .update(desafio)
+    .eq('id', id)
+    .select()
+    .single()
+  if (error) throw error
+  return data
+}
+
+export async function eliminarDesafio(id) {
+  const { error } = await supabase
+    .from('desafios_activos')
+    .delete()
+    .eq('id', id)
+  if (error) throw error
+}
+
 export async function crearActividad(actividad) {
   const { data, error } = await supabase
     .from('actividad_feed')
@@ -155,6 +174,25 @@ export async function crearActividad(actividad) {
     .single()
   if (error) throw error
   return data
+}
+
+export async function actualizarActividad(id, actividad) {
+  const { data, error } = await supabase
+    .from('actividad_feed')
+    .update(actividad)
+    .eq('id', id)
+    .select()
+    .single()
+  if (error) throw error
+  return data
+}
+
+export async function eliminarActividad(id) {
+  const { error } = await supabase
+    .from('actividad_feed')
+    .delete()
+    .eq('id', id)
+  if (error) throw error
 }
 
 export async function obtenerVotosTier(miembroId, usuarioId = null) {
@@ -252,47 +290,9 @@ export async function actualizarEstadoClip(clipId, nuevoEstado) {
   }
   return await fetchSupabaseAuthenticated('PATCH', 'clips', { estado: nuevoEstado }, `id=eq.${clipId}`)
 }
-export async function obtenerImagenesGaleria() {
-  const data = await fetchSupabase('imagenes_galeria',
-    'select=*,categorias_galeria(nombre,slug),miembros(nombre_mostrar)&estado=eq.activo&order=creado_en.desc'
-  )
-  return data
-}
-
-export async function obtenerCategoriasGaleria() {
-  const data = await fetchSupabase('categorias_galeria',
-    'select=*&estado=eq.activo&order=orden_mostrar'
-  )
-  return data
-}
-
-export async function obtenerImagenesPorCategoria(categoriaSlug) {
-  const categorias = await fetchSupabase('categorias_galeria',
-    `select=id&slug=eq.${categoriaSlug}`
-  )
-  if (!categorias?.[0]) return []
-
-  const data = await fetchSupabase('imagenes_galeria',
-    `select=*,categorias_galeria(nombre,slug)&categoria_id=eq.${categorias[0].id}&estado=eq.activo&order=creado_en.desc`
-  )
-  return data
-}
 export async function obtenerCarries() {
   const data = await fetchSupabase('carries',
     'select=*,miembros(id,nombre_mostrar,avatar_url,banner_url,biografia,roles_miembro(roles(nombre,color)),enlaces_sociales_miembro(url_perfil,plataformas_sociales(nombre,icono_url)))&estado=eq.activo&order=orden'
-  )
-  return data
-}
-export async function obtenerVetados() {
-  const data = await fetchSupabase('vetados',
-    'select=*,tipos_vetado(nombre,icono,nivel_peligro),miembros:reportado_por(nombre_mostrar)&estado=eq.activo&order=creado_en.desc'
-  )
-  return data
-}
-
-export async function obtenerTiposVetado() {
-  const data = await fetchSupabase('tipos_vetado',
-    'select=*&estado=eq.activo&order=nivel_peligro.desc'
   )
   return data
 }

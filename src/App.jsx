@@ -4,15 +4,16 @@ import { UserAuthProvider } from './context/UserAuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home.jsx'
 import Clips from './pages/Clips.jsx'
-import Gallery from './pages/Gallery.jsx'
 import Carries from './pages/Carries.jsx'
-import Vetados from './pages/Vetados.jsx'
 import UserAuth from './pages/UserAuth.jsx'
 import TierList from './pages/TierList.jsx'
 import Events from './pages/Events.jsx'
 import Profile from './pages/Profile.jsx'
 import MemberRequest from './pages/MemberRequest.jsx'
 import Community from './pages/Community.jsx'
+import Alliances from './pages/Alliances.jsx'
+import AllianceRequest from './pages/AllianceRequest.jsx'
+import AllianceCreate from './pages/AllianceCreate.jsx'
 import Login from './pages/admin/Login.jsx'
 import AdminLayout from './pages/admin/AdminLayout.jsx'
 import Dashboard from './pages/admin/Dashboard.jsx'
@@ -24,6 +25,8 @@ import AdminPuntos from './pages/admin/AdminPuntos.jsx'
 import AdminEventos from './pages/admin/AdminEventos.jsx'
 import AdminSolicitudes from './pages/admin/AdminSolicitudes.jsx'
 import AdminCommunity from './pages/admin/AdminCommunity.jsx'
+import AdminAlliances from './pages/admin/AdminAlliances.jsx'
+import AdminCommunities from './pages/admin/AdminCommunities.jsx'
 
 function App() {
     return (
@@ -39,9 +42,11 @@ function App() {
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/profile/:id" element={<Profile />} />
                     <Route path="/solicitar-membresia" element={<MemberRequest />} />
-                    <Route path="/gallery" element={<Gallery />} />
+                    <Route path="/alianzas" element={<Alliances />} />
+                    <Route path="/alianzas/crear" element={<AllianceCreate />} />
+                    <Route path="/alianzas/solicitar" element={<AllianceRequest />} />
+                    <Route path="/alianzas/:slug" element={<Alliances />} />
                     <Route path="/carries" element={<Carries />} />
-                    <Route path="/vetados" element={<Vetados />} />
                     <Route path="/login" element={<UserAuth />} />
 
                     {}
@@ -62,6 +67,8 @@ function App() {
                         <Route path="carries" element={<AdminCarries />} />
                         <Route path="usuarios" element={<AdminUsuarios />} />
                         <Route path="solicitudes" element={<AdminSolicitudes />} />
+                        <Route path="alianzas" element={<AdminAlliances />} />
+                        <Route path="comunidades" element={<AdminCommunities />} />
                         <Route path="actividad" element={<AdminCommunity section="actividad" />} />
                         <Route path="desafios" element={<AdminCommunity section="desafios" />} />
                         <Route path="votos" element={<AdminCommunity section="votos" />} />

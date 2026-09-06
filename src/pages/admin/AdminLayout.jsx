@@ -5,11 +5,11 @@ import { Icon } from '../../components/Icons'
 import './AdminLayout.css'
 
 function AdminLayout() {
-    const { admin, logout } = useAuth()
+    const { logout } = useAuth()
     const location = useLocation()
     const navigate = useNavigate()
     const [sidebarOpen, setSidebarOpen] = useState(false)
-    const [expandedGroups, setExpandedGroups] = useState(() => ({ Resumen: true, Comunidad: true, Contenido: true }))
+    const [expandedGroups, setExpandedGroups] = useState(() => ({ Resumen: true, Comunidad: true, Red: true, Gestión: false, Contenido: true, Comunicación: false }))
     useEffect(() => {
         setSidebarOpen(false)
     }, [location.pathname])
@@ -46,20 +46,37 @@ function AdminLayout() {
             label: 'Comunidad',
             items: [
                 { path: '/admin/solicitudes', icon: 'file', label: 'Solicitudes' },
-                { path: '/admin/miembros', icon: 'user', label: 'Miembros' },
-                { path: '/admin/usuarios', icon: 'user', label: 'Usuarios' },
                 { path: '/admin/actividad', icon: 'calendar', label: 'Actividad' },
                 { path: '/admin/desafios', icon: 'target', label: 'Desafíos' }
             ]
         },
         {
+            label: 'Red',
+            items: [
+                { path: '/admin/alianzas', icon: 'link', label: 'Alianzas' },
+                { path: '/admin/comunidades', icon: 'user', label: 'Comunidades' }
+            ]
+        },
+        {
+            label: 'Gestión',
+            items: [
+                { path: '/admin/miembros', icon: 'user', label: 'Miembros' },
+                { path: '/admin/usuarios', icon: 'user', label: 'Usuarios' },
+                { path: '/admin/puntos', icon: 'target', label: 'Puntos' }
+            ]
+        },
+        {
             label: 'Contenido',
             items: [
-                { path: '/admin/puntos', icon: 'target', label: 'Puntos' },
                 { path: '/admin/eventos', icon: 'calendar', label: 'Eventos' },
                 { path: '/admin/clips', icon: 'video', label: 'Clips' },
-                { path: '/admin/carries', icon: 'star', label: 'Top Clan' },
-                { path: '/admin/votos', icon: 'trophy', label: 'Votos Tier' },
+                { path: '/admin/carries', icon: 'star', label: 'Destacados' },
+                { path: '/admin/votos', icon: 'trophy', label: 'Votos Tier' }
+            ]
+        },
+        {
+            label: 'Comunicación',
+            items: [
                 { path: '/admin/discord', icon: 'externalLink', label: 'Discord' }
             ]
         }
@@ -77,9 +94,9 @@ function AdminLayout() {
             <aside className={`admin-sidebar ${sidebarOpen ? 'open' : ''}`}>
                 <div className="admin-sidebar-header">
                     <div className="sidebar-brand">
-                        <img src={`${import.meta.env.BASE_URL}images/logo123.jpg`} alt="Ryo" className="brand-logo" />
+                        <img src={`${import.meta.env.BASE_URL}images/logo123.jpg`} alt="Community Lou" className="brand-logo" />
                         <div className="brand-text">
-                            <span>Ryo</span>
+                            <span>Community Lou</span>
                             <small>Admin Panel</small>
                         </div>
                     </div>
@@ -90,21 +107,6 @@ function AdminLayout() {
                     >
                         <Icon name="close" size={20} />
                     </button>
-                </div>
-
-                {}
-                <div className="admin-profile-top">
-                    <div className="admin-avatar-medium">
-                        {admin?.avatar_url ? (
-                            <img src={admin.avatar_url} alt={admin.nombre} />
-                        ) : (
-                            admin?.nombre?.charAt(0)?.toUpperCase() || <Icon name="user" size={20} />
-                        )}
-                    </div>
-                    <div className="admin-info-text">
-                        <span className="admin-name-display">{admin?.nombre}</span>
-                        <span className="admin-role-display">Nivel {admin?.nivel_acceso}</span>
-                    </div>
                 </div>
 
                 <nav className="sidebar-menu">
@@ -134,7 +136,7 @@ function AdminLayout() {
                     >
                         <Icon name="menu" size={22} />
                     </button>
-                    <img src={`${import.meta.env.BASE_URL}images/logo123.jpg`} alt="Ryo" className="mobile-logo" />
+                    <img src={`${import.meta.env.BASE_URL}images/logo123.jpg`} alt="Community Lou" className="mobile-logo" />
                     <span className="mobile-title">Admin</span>
                 </header>
 

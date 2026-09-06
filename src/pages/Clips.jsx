@@ -93,7 +93,7 @@ function Clips() {
                         <Icon name="video" size={36} />
                         Clips
                     </h1>
-                    <p className="page-subtitle">Los mejores momentos del clan Ryo</p>
+                    <p className="page-subtitle">Los mejores momentos de la comunidad</p>
 
                     {user && (
                         <div className="header-actions">

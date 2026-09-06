@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
 import {
+    actualizarActividad,
+    actualizarDesafio,
     crearActividad,
     crearDesafio,
+    eliminarActividad,
+    eliminarDesafio,
     notificarDiscord,
     obtenerActividadFeed,
     obtenerDesafiosAdmin,
@@ -36,6 +40,8 @@ function AdminCommunity({ section }) {
     const [showForm, setShowForm] = useState(false)
     const [activityForm, setActivityForm] = useState(emptyActivity)
     const [challengeForm, setChallengeForm] = useState(createChallenge())
+    const [editingActivity, setEditingActivity] = useState(null)
+    const [editingChallenge, setEditingChallenge] = useState(null)
     const [discordForm, setDiscordForm] = useState({ title: '', description: '' })
 
     async function loadData() {
@@ -60,13 +66,40 @@ function AdminCommunity({ section }) {
 
     useEffect(() => { loadData() }, [])
 
-    function openForm() {
+    function openActivityForm(item = null) {
         setMessage('')
+        setEditingActivity(item)
+        setActivityForm(item ? {
+            miembro_id: item.miembro_id || '',
+            tipo: item.tipo || 'anuncio',
+            titulo: item.titulo || '',
+            descripcion: item.descripcion || ''
+        } : emptyActivity)
+        setShowForm(true)
+    }
+
+    function openChallengeForm(item = null) {
+        setMessage('')
+        setEditingChallenge(item)
+        setChallengeForm(item ? {
+            titulo: item.titulo || '',
+            descripcion: item.descripcion || '',
+            objetivo_tipo: item.objetivo_tipo || 'clips',
+            objetivo_cantidad: item.objetivo_cantidad || 1,
+            recompensa_puntos: item.recompensa_puntos || 0,
+            inicia_en: getLocalDateTimeInputValue(new Date(item.inicia_en)),
+            termina_en: getLocalDateTimeInputValue(new Date(item.termina_en)),
+            estado: item.estado || 'activo'
+        } : createChallenge())
         setShowForm(true)
     }
 
     function closeForm() {
-        if (!saving) setShowForm(false)
+        if (!saving) {
+            setShowForm(false)
+            setEditingActivity(null)
+            setEditingChallenge(null)
+        }
     }
 
     async function saveActivity(event) {
@@ -74,10 +107,13 @@ function AdminCommunity({ section }) {
         setSaving(true)
         setMessage('')
         try {
-            await crearActividad({ ...activityForm, miembro_id: activityForm.miembro_id || null })
+            const payload = { ...activityForm, miembro_id: activityForm.miembro_id || null }
+            if (editingActivity) await actualizarActividad(editingActivity.id, payload)
+            else await crearActividad(payload)
             setActivityForm(emptyActivity)
             setShowForm(false)
-            setMessage('Actividad publicada')
+            setEditingActivity(null)
+            setMessage(editingActivity ? 'Actividad actualizada' : 'Actividad publicada')
             await loadData()
         } catch (error) {
             setMessage(error.message || 'No se pudo publicar la actividad')
@@ -91,19 +127,50 @@ function AdminCommunity({ section }) {
         setSaving(true)
         setMessage('')
         try {
-            await crearDesafio({
+            const payload = {
                 ...challengeForm,
                 objetivo_cantidad: Number(challengeForm.objetivo_cantidad),
                 recompensa_puntos: Number(challengeForm.recompensa_puntos),
                 inicia_en: new Date(challengeForm.inicia_en).toISOString(),
                 termina_en: new Date(challengeForm.termina_en).toISOString()
-            })
+            }
+            if (editingChallenge) await actualizarDesafio(editingChallenge.id, payload)
+            else await crearDesafio(payload)
             setChallengeForm(createChallenge())
             setShowForm(false)
-            setMessage('Desafío creado')
+            setEditingChallenge(null)
+            setMessage(editingChallenge ? 'Desafío actualizado' : 'Desafío creado')
             await loadData()
         } catch (error) {
             setMessage(error.message || 'No se pudo crear el desafío')
+        } finally {
+            setSaving(false)
+        }
+    }
+
+    async function removeActivity(id) {
+        if (!window.confirm('¿Eliminar esta actividad?')) return
+        try {
+            setSaving(true)
+            await eliminarActividad(id)
+            setMessage('Actividad eliminada')
+            await loadData()
+        } catch (error) {
+            setMessage(error.message || 'No se pudo eliminar la actividad')
+        } finally {
+            setSaving(false)
+        }
+    }
+
+    async function removeChallenge(id) {
+        if (!window.confirm('¿Eliminar este desafío?')) return
+        try {
+            setSaving(true)
+            await eliminarDesafio(id)
+            setMessage('Desafío eliminado')
+            await loadData()
+        } catch (error) {
+            setMessage(error.message || 'No se pudo eliminar el desafío')
         } finally {
             setSaving(false)
         }
@@ -145,7 +212,7 @@ function AdminCommunity({ section }) {
                 </div>
                 <div className="crud-header-actions">
                     <Icon name={icons[section]} size={28} />
-                    {canAdd && <button className="btn-primary" type="button" onClick={openForm}><Icon name="file" size={17} /> Añadir</button>}
+                    {canAdd && <button className="btn-primary" type="button" onClick={() => section === 'actividad' ? openActivityForm() : openChallengeForm()}><Icon name="file" size={17} /> Añadir</button>}
                 </div>
             </div>
 
@@ -153,13 +220,13 @@ function AdminCommunity({ section }) {
 
             {section === 'actividad' && (
                 <div className="community-list activity-list">
-                    {activity.length ? activity.map(item => <article className="activity-line community-list-item" key={item.id}><span className="activity-dot" /><div><strong>{item.titulo}</strong><small>{item.descripcion || 'Actividad registrada'} · {new Date(item.creado_en).toLocaleString('es-ES')}</small></div></article>) : <div className="empty-state">No hay actividad publicada.</div>}
+                    {activity.length ? activity.map(item => <article className="activity-line community-list-item" key={item.id}><span className="activity-dot" /><div className="community-item-content"><strong>{item.titulo}</strong><small>{item.descripcion || 'Actividad registrada'} · {new Date(item.creado_en).toLocaleString('es-ES')}</small></div><div className="community-item-actions"><button className="btn-icon" type="button" title="Editar actividad" onClick={() => openActivityForm(item)}><Icon name="edit" size={16} /></button><button className="btn-icon btn-danger" type="button" title="Eliminar actividad" onClick={() => removeActivity(item.id)}><Icon name="trash" size={16} /></button></div></article>) : <div className="empty-state">No hay actividad publicada.</div>}
                 </div>
             )}
 
             {section === 'desafios' && (
                 <div className="community-list challenge-list">
-                    {challenges.length ? challenges.map(challenge => <article className="crud-card community-list-item" key={challenge.id}><div className="card-body"><h3 className="card-title">{challenge.titulo}</h3><p>{challenge.descripcion}</p><span>{challenge.objetivo_cantidad} {challenge.objetivo_tipo} · {challenge.recompensa_puntos} puntos · {challenge.estado}</span><small>Hasta {new Date(challenge.termina_en).toLocaleString('es-ES')}</small></div></article>) : <div className="empty-state">No hay desafíos creados.</div>}
+                    {challenges.length ? challenges.map(challenge => <article className="crud-card community-list-item" key={challenge.id}><div className="card-body"><div className="community-card-heading"><h3 className="card-title">{challenge.titulo}</h3><div className="community-item-actions"><button className="btn-icon" type="button" title="Editar desafío" onClick={() => openChallengeForm(challenge)}><Icon name="edit" size={16} /></button><button className="btn-icon btn-danger" type="button" title="Eliminar desafío" onClick={() => removeChallenge(challenge.id)}><Icon name="trash" size={16} /></button></div></div><p>{challenge.descripcion}</p><span>{challenge.objetivo_cantidad} {challenge.objetivo_tipo} · {challenge.recompensa_puntos} puntos · {challenge.estado}</span><small>Hasta {new Date(challenge.termina_en).toLocaleString('es-ES')}</small></div></article>) : <div className="empty-state">No hay desafíos creados.</div>}
                 </div>
             )}
 

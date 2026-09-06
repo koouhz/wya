@@ -1,0 +1,57 @@
+.alliances-page { background: var(--color-bg); }
+.alliance-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; }
+.alliance-search { max-width: 520px; margin-bottom: 24px; }
+.alliances-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 320px)); justify-content: start; gap: 24px 18px; }
+.alliance-card-shell { min-width: 0; }
+.alliance-card { overflow: hidden; background: var(--color-card); border: 1px solid var(--color-border); color: var(--color-text); transition: transform 180ms ease, border-color 180ms ease; }
+.alliance-card:hover { transform: translateY(-3px); border-color: var(--color-primary); }
+.alliance-card-main { display: block; }
+.alliance-card-visual { position: relative; height: 112px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(240,90,71,.25), rgba(8,10,10,.95)); background-size: cover; background-position: center; }
+.alliance-card-shade, .alliance-profile-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.72)); }
+.alliance-card-visual img { position: relative; width: 62px; height: 62px; object-fit: cover; border: 2px solid rgba(247,243,236,.8); background: #101414; }
+.alliance-status { position: absolute; top: 12px; right: 12px; z-index: 1; padding: 5px 9px; font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; background: rgba(0,0,0,.7); }
+.status-activa { color: #65c18c; }
+.status-pausada { color: #f2c14e; }
+.alliance-card-body { padding: 13px; }
+.alliance-card-body h2 { margin: 0 0 7px; font-size: 1.05rem; }
+.alliance-card-body p { min-height: 32px; margin: 0 0 11px; color: var(--color-text-muted); font-size: .78rem; }
+.alliance-card-body span { display: inline-flex; align-items: center; gap: 6px; color: var(--color-text-muted); font-size: .72rem; }
+.alliance-card-action { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; padding: 9px 12px; color: #fff; background: #202060; border: 1px solid #5555c7; border-radius: var(--radius-md); font-size: .74rem; font-weight: 700; }
+.alliance-card-action:hover { background: #30308a; border-color: #7777e8; }
+.alliance-card-pending { display: inline-block; margin: 8px 0 0 2px; color: #f2c14e; font-size: .74rem; font-weight: 700; }
+.alliance-heading-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+.alliance-heading-actions .discord-cta { position: static; left: auto; bottom: auto; align-self: auto; }
+.alliance-ranking { margin-top: 30px; padding: 20px; background: var(--color-card); border: 1px solid var(--color-border); }
+.alliance-ranking h2 { margin: 5px 0 16px; font-size: 1.15rem; }
+.alliance-ranking-row { display: grid; grid-template-columns: 42px 1fr auto; gap: 12px; align-items: center; padding: 12px 0; border-top: 1px solid var(--color-border); }
+.alliance-ranking-row strong { color: var(--color-primary); font-family: var(--font-display); }
+.alliance-ranking-row span { font-weight: 700; }
+.alliance-ranking-row small { color: var(--color-text-muted); }
+.alliance-profile-page, .alliance-request-page { max-width: 1050px; }
+.alliance-profile-hero { position: relative; min-height: 250px; display: flex; align-items: end; gap: 20px; padding: 28px; margin-top: 20px; background: linear-gradient(135deg, rgba(240,90,71,.22), #101414); background-size: cover; background-position: center; border: 1px solid var(--color-border); overflow: hidden; }
+.alliance-profile-hero img { position: relative; width: 110px; height: 110px; object-fit: cover; border: 2px solid #f7f3ec; }
+.alliance-profile-hero > div:last-child { position: relative; }
+.alliance-profile-hero h1 { margin: 5px 0; font-size: clamp(2rem, 5vw, 3.6rem); }
+.alliance-profile-hero p { max-width: 580px; margin: 0; color: var(--color-text-muted); }
+.alliance-profile-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
+.alliance-panel { padding: 20px; background: var(--color-card); border: 1px solid var(--color-border); }
+.alliance-panel h2 { margin: 0 0 16px; font-size: 1rem; }
+.alliance-panel-wide { grid-column: 1 / -1; }
+.alliance-panel dl { display: grid; gap: 11px; margin: 0 0 18px; }
+.alliance-panel dl div { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--color-border); padding-bottom: 9px; }
+.alliance-panel dt, .muted-copy { color: var(--color-text-muted); font-size: .8rem; }
+.alliance-panel dd { margin: 0; font-size: .85rem; }
+.alliance-member { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 9px; padding: 9px 0; color: var(--color-text); border-bottom: 1px solid var(--color-border); }
+.alliance-member span { width: 32px; height: 32px; display: grid; place-items: center; overflow: hidden; background: rgba(240,90,71,.12); }
+.alliance-member img { width: 100%; height: 100%; object-fit: cover; }
+.alliance-member small { color: var(--color-primary); text-transform: capitalize; }
+.alliance-mini-card { display: inline-flex; flex-direction: column; gap: 5px; min-width: 190px; padding: 14px; margin: 0 10px 10px 0; color: var(--color-text); background: rgba(255,255,255,.03); border: 1px solid var(--color-border); }
+.alliance-mini-card span { color: var(--color-primary); font-size: .74rem; }
+.alliance-form { max-width: 650px; display: grid; gap: 16px; padding: 22px; background: var(--color-card); border: 1px solid var(--color-border); }
+.alliance-form label { display: grid; gap: 7px; color: var(--color-text-secondary); font-size: .82rem; font-weight: 600; }
+.alliance-form input, .alliance-form textarea, .alliance-form select { width: 100%; box-sizing: border-box; padding: 12px 13px; color: var(--color-text); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); font: inherit; }
+.alliance-form textarea { min-height: 120px; resize: vertical; }
+.alliance-form input:focus, .alliance-form textarea:focus, .alliance-form select:focus { outline: none; border-color: var(--color-primary); }
+.request-success { color: #65c18c; }
+.request-error { color: #f87171; }
+@media (max-width: 680px) { .alliance-heading { align-items: stretch; flex-direction: column; } .alliance-heading-actions { justify-content: flex-end; } .alliance-heading .discord-cta { align-self: flex-end; } .alliance-profile-grid { grid-template-columns: 1fr; } .alliance-panel-wide { grid-column: auto; } .alliance-profile-hero { min-height: 300px; flex-direction: column; align-items: flex-start; justify-content: end; padding: 20px; } .alliance-profile-hero img { width: 82px; height: 82px; } }

@@ -65,7 +65,7 @@ function Profile() {
         }
     }
     if (!id && !isLoggedIn) {
-        return <div className="platform-page"><Header /><main className="platform-main"><div className="page-heading"><div><span className="section-kicker">Identidad / Progreso</span><h1>Tu perfil</h1><p>Inicia sesión para consultar tu recorrido dentro de RYO.</p></div></div><Link className="discord-cta" to="/login"><Icon name="user" size={18} /> Iniciar sesión</Link></main></div>
+        return <div className="platform-page"><Header /><main className="platform-main"><div className="page-heading"><div><span className="section-kicker">Identidad / Progreso</span><h1>Tu perfil</h1><p>Inicia sesión para consultar tu recorrido dentro de Community Lou.</p></div></div><Link className="discord-cta" to="/login"><Icon name="user" size={18} /> Iniciar sesión</Link></main></div>
     }
 
     if (loadingMember || (memberId && loadingProgress)) {
@@ -84,7 +84,7 @@ function Profile() {
     return <div className="platform-page"><Header /><main className="platform-main profile-main">
         <section className="profile-hero">
             <div className="profile-avatar-large">{minecraftAvatar || member.avatar_url ? <img src={minecraftAvatar || member.avatar_url} alt="" /> : <Icon name="user" size={34} />}</div>
-            <div className="profile-identity"><span className="section-kicker">Miembro RYO</span><h1>{member.nombre_mostrar}</h1><p>{member.minecraft_username || member.nombre_usuario}</p></div>
+            <div className="profile-identity"><span className="section-kicker">Miembro verificado</span><h1>{member.nombre_mostrar}</h1><p>{member.minecraft_username || member.nombre_usuario}</p></div>
             <div className="tier-badge"><span>{member.tier_nombre || 'Tier I'}</span><small>Rango actual</small></div>
         </section>
         <MinecraftProfileCard username={member.minecraft_username} fallbackName={member.nombre_mostrar} cachedMember={member} onAvatarChange={setMinecraftAvatar} />

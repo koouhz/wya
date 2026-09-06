@@ -12,13 +12,18 @@ export function UserAuthProvider({ children }) {
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
             (event, session) => {
                 if (session?.user) {
-                    window.setTimeout(() => {
-                        loadUserProfile(session.user.id, session.access_token)
+                    setLoading(true)
+                    window.setTimeout(async () => {
+                        try {
+                            await loadUserProfile(session.user.id, session.access_token)
+                        } finally {
+                            setLoading(false)
+                        }
                     }, 0)
                 } else if (event === 'SIGNED_OUT') {
                     setUser(null)
+                    setLoading(false)
                 }
-                setLoading(false)
             }
         )
         return () => subscription.unsubscribe()
